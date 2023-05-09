@@ -9,8 +9,8 @@ function App() {
   return (
     <>
      <div>hello1</div>
-     <div>hello3</div>
      <div>hello2</div>
+     <div>hello3</div>
      <button onClick={update}>检查更新</button>
      {/* <div>hello1</div> */}
     </>
