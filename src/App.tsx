@@ -1,10 +1,9 @@
-
+import {checkUpdate} from './utils/utils'
 
 function App() {
-  const  {ipcRenderer} = require('electron')
   const update=()=>{
     // 渲染进程：主动触发版本检测事件
-    ipcRenderer.send('check-update')
+    checkUpdate()
   }
   return (
     <>

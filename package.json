@@ -5,15 +5,14 @@
   "main": "main.js",
   "scripts": {
     "start": "BROWSER=none vite",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "dev": "concurrently \"npm run start\" \"npm run dev_el \"",
-    "dev_el":"electron .",
-    "build": "tsc && vite build",
-    "build:electron": "electron-builder  --mac "
+    "dev": "concurrently \"npm run start\" \"npm run dev:electron \"",
+    "dev:electron": "electron .",
+    "build": "vite build && npm run build:electron",
+    "build:electron": "electron-builder --mac"
   },
   "dependencies": {
-  
+    "dotenv": "^16.0.3",
+    "electron-log": "^5.0.0-beta.23",
     "electron-updater": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -25,9 +24,8 @@
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "^4.0.0-beta.0",
     "concurrently": "^8.0.1",
-    "electron-log": "^5.0.0-beta.23",
     "cross-env": "^7.0.3",
-    "electron": "^24.1.2",
+    "electron": "^20.0.1",
     "electron-builder": "^23.6.0",
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -36,18 +34,18 @@
     "vite": "^4.3.0"
   },
   "build": {
-    "appId": "com.example.app",
-    "productName": "my app",
+    "appId": "com.xiaoge.app",
+    "productName": "xiaoge",
     "copyright": "",
     "publish": [
       {
         "provider": "generic",
-        "url": "https://gitee.com/gepengbo/electron_update"
+        "url": ""
       }
     ],
     "directories": {
-      "buildResources": "dist",
-      "output": "build"
+      "buildResources": "www",
+      "output": "release"
     },
     "nsis": {
       "oneClick": false,
@@ -68,7 +66,7 @@
       ]
     },
     "files": [
-      "dist/**/*",
+      "www/**/*",
       "./main.js"
     ],
     "extends": null

@@ -2,6 +2,19 @@ const { app, BrowserWindow, ipcMain,dialog } = require('electron')
 const path = require('path')
 const log = require('electron-log');
 const { autoUpdater } = require('electron-updater')
+const env = process.env.NODE_ENV || 'development';
+require('dotenv').config({ path: `.env.${env}` });
+
+// 获取当前的环境变量
+// const env = process.env.NODE_ENV;
+if (env === 'development') {
+  log.info('开发环境');
+  log.info(process.env.MY_VAR)
+} else if (env === 'production') {
+  log.info('生产环境');
+  log.info(process.env.MY_VAR)
+}
+
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -13,14 +26,7 @@ const createWindow = () => {
 
   })
 
-  
   autoUpdater.autoDownload = false
-  // 通过main进程发送事件给renderer进程，提示更新信息
-  // function sendUpdateMessage(text) {
-  //   alert('2222')
-  //   // mainWindow.webContents.send('message', text)
-  //   console.log(text, 'text');
-  // }
 
 //开发使用 生产存在安全隐患
   Object.defineProperty(app, 'isPackaged', {
@@ -100,15 +106,17 @@ const createWindow = () => {
   // autoUpdater.quitAndInstall()
 
   // 显示入口文件内容
-  // mainWindow.loadFile('index.html')
-  // mainWindow.loadURL('https://juejin.cn/')
-  mainWindow.loadURL('http://localhost:3000/')
-  // mainWindow.loadFile('dist/index.html')
+  //判断是不是开发环境
+  if (env === 'development'){
+    mainWindow.loadURL('http://localhost:3000/')
+    mainWindow.webContents.openDevTools();
+  }else{
+    mainWindow.loadFile('www/index.html')
+  }
 
   // 打开调试模式
   mainWindow.webContents.openDevTools();
 }
-
 
 // 初始化
 app.whenReady().then(() => {
