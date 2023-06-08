@@ -2,7 +2,7 @@
   "name": "vite_electron",
   "private": true,
   "version": "0.0.1",
-  "main": "main.js",
+  "main":"main.js",
   "scripts": {
     "start": "BROWSER=none vite",
     "dev": "concurrently \"npm run start\" \"npm run dev:electron \"",
@@ -44,8 +44,8 @@
       }
     ],
     "directories": {
-      "buildResources": "www",
-      "output": "release"
+      "buildResources": "release/www",
+      "output": "release/app"
     },
     "nsis": {
       "oneClick": false,
